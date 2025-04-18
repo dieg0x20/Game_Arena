@@ -1,0 +1,11 @@
+POST http://localhost:8080/
+content-type: application/json
+
+  {
+  "name": "João",
+  "nick": "joaogamer",
+  "email": "joao@email.com",
+  "age": "22",
+  "file": "perfil.jpg",
+  "terms": true
+}
