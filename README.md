@@ -78,4 +78,4 @@ Campos obrigatórios:
 
 1. Clonar o repositório
 ```bash
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
+git clone https://github.com/dieg0x20/Game_Arena.git
