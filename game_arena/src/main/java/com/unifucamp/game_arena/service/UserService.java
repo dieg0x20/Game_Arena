@@ -17,8 +17,9 @@ public class UserService {
     this.userRepository = userRepository;
   }
 
-  public Page<User> findAll(int page, int items){
-    Pageable pageable = PageRequest.of(page, items);
+  public Page<User> findAll(int page, int size){
+
+    Pageable pageable = PageRequest.of(page, size);
     return userRepository.findAll(pageable);
   }
 
