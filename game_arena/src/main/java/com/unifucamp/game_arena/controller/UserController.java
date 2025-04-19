@@ -16,9 +16,10 @@ public class UserController {
   public UserController(UserService userService) {
     this.userService = userService;
   }
-  @GetMapping
-  public ResponseEntity<Page<User>> findAll(@RequestParam int page, @RequestParam int items){
-    return ResponseEntity.ok(userService.findAll(page, items));
+
+  @GetMapping("/")
+  public ResponseEntity<Page<User>> findAll(@RequestParam int page, @RequestParam int size){
+    return ResponseEntity.ok(userService.findAll(page, size));
   }
-  
+
 }
