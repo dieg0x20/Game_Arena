@@ -46,6 +46,6 @@ public class User {
   private boolean isActive;
 
   @Column(name = "pagamento")
-  private String isPaid;
+  private boolean isPaid;
 
 }
