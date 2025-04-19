@@ -12,11 +12,11 @@ import com.unifucamp.game_arena.entity.Subscription;
 import com.unifucamp.game_arena.service.SubscriptionService;
 
 @RestController
-public class UserController {
+public class SubscriptionController {
 
  private final SubscriptionService subscriptionService;
 
-  public UserController(SubscriptionService subscriptionService) {
+  public SubscriptionController(SubscriptionService subscriptionService) {
   this.subscriptionService = subscriptionService;
 }
 
