@@ -1,0 +1,34 @@
+### Register
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+
+{
+  "name": "henrie",
+  "email": "henrique2@example.com",
+  "password": "123456"
+}
+
+### Login
+
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "email": "apie@example.com",
+  "password": "123456"
+}
+
+# Paginacao da tabela
+GET http://localhost:8080/
+  ?page=0
+  &size=15
+ Authorization: Bearer <your_token_here>
+
+
+
+### Baixar comprovantes
+GET http://localhost:8080/comprovantes/teste.jpg
+  Authorization: Bearer <your_token_here>
+
+### Documentação
+GET Http://localhost:8080/swagger-ui.html
