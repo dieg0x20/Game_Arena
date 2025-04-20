@@ -36,7 +36,7 @@ public class Subscription {
   @Column(name = "aceitou_termos")
   private boolean aceptTerms;
 
-  @Column (name = "comprovante_pagamento")
+  @Column(name = "comprovante_pagamento")
   private String recipientUrl;
 
   @Setter(AccessLevel.NONE)

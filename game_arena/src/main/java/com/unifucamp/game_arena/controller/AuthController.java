@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.unifucamp.game_arena.auth.dto.LoginRequestDTO;
+import com.unifucamp.game_arena.auth.dto.RegisterRequestDTO;
+import com.unifucamp.game_arena.auth.dto.ResponseDTO;
 import com.unifucamp.game_arena.auth.service.TokenService;
-import com.unifucamp.game_arena.dto.LoginRequestDTO;
-import com.unifucamp.game_arena.dto.RegisterRequestDTO;
-import com.unifucamp.game_arena.dto.ResponseDTO;
 import com.unifucamp.game_arena.entity.User;
 import com.unifucamp.game_arena.repositories.UserRepository;
 
@@ -32,12 +32,12 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<ResponseDTO> login(@Valid @RequestBody LoginRequestDTO body) {
-        User user = userRepository.findByEmail(body.email()).orElseThrow(() -> 
-            new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        User user = userRepository.findByEmail(body.email())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
         if (passwordEncoder.matches(body.password(), user.getPassword())) {
             String token = tokenService.generateToken(user);
-            return ResponseEntity.ok(new ResponseDTO(user.getName(), token));
+            return ResponseEntity.ok(new ResponseDTO(token));
         }
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
     }
@@ -55,7 +55,7 @@ public class AuthController {
             userRepository.save(newUser);
 
             String token = tokenService.generateToken(newUser);
-            return ResponseEntity.ok(new ResponseDTO(newUser.getName(), token));
+            return ResponseEntity.ok(new ResponseDTO(token));
         }
         return ResponseEntity.badRequest().build();
     }
