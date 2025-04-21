@@ -1,7 +1,6 @@
 package com.unifucamp.game_arena.service;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -17,18 +16,7 @@ public class SubscriptionService {
     this.subscriptionRepository = subscriptionRepository;
   }
 
-  public Page<Subscription> findAll(int page, int size) {
-
-    if (page < 0)
-      page = 0;
-
-    if (size < 5)
-      size = 5;
-
-    if (size > 30)
-      size = 30;
-
-    Pageable pageable = PageRequest.of(page, size);
+  public Page<Subscription> findAll(Pageable pageable) {
 
     try {
 
