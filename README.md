@@ -13,7 +13,7 @@ Sistema web para gerenciamento de inscrições de campeonato de FIFA.
 
 ---
 
-## ✅ Funcionalidades obrigatórias
+## ✅ Funcionalidades
 
 ### 1. Página principal
 - Nome do site e breve descrição sobre o campeonato de FIFA.
@@ -44,18 +44,16 @@ Campos obrigatórios:
 
 ---
 
-## 🔧 Tarefas por área
-
 ### 🔙 Backend (JAVA)
-- Criar lógica para:
+- lógica para:
   - Validação dos dados do formulário.
   - Upload e salvamento do comprovante.
 - Integração com banco de dados (salvar e listar inscritos).
-- Criar endpoint ou página para administração (exibir inscritos).
+- Página para administração (exibir inscritos).
 
 ### 🗃️ DBA (MySQL)
-- Criar banco de dados com uma tabela chamada `inscricoes`.
-- Campos sugeridos:
+- Banco de dados com uma tabela chamada `inscricoes`.
+- Campos:
   - `id` (INT, AUTO_INCREMENT)
   - `nome_completo` (VARCHAR)
   - `nickname` (VARCHAR)
@@ -66,16 +64,8 @@ Campos obrigatórios:
   - `data_inscricao` (DATETIME)
 
 ### 🎨 Frontend (HTML + CSS + JS)
-- Criar a página principal com:
+- Página principal com:
   - Layout responsivo e acessível.
   - Formulário estilizado (cores da Unifucamp).
   - Interações básicas (ex: validação de campos com JS, mensagens de erro).
-- Criar página de administração simples com uma tabela HTML para mostrar os dados dos inscritos.
-
----
-
-## 🚀 Como rodar o projeto
-
-1. Clonar o repositório
-```bash
-git clone https://github.com/dieg0x20/Game_Arena.git
+- Página de administração simples com uma tabela HTML para mostrar os dados dos inscritos.
