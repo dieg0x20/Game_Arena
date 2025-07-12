@@ -1,29 +1,26 @@
-package com.unifucamp.gamearena.auth.service;
-
-import java.util.ArrayList;
+package com.unifucamp.gamearena.security;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import com.unifucamp.gamearena.domain.User;
-import com.unifucamp.gamearena.repositories.UserRepository;
+import com.unifucamp.gamearena.entity.User;
+import com.unifucamp.gamearena.repository.UserRepository;
 
 @Component
-public class CustomUserDetailsService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
   private final UserRepository repository;
 
-  public CustomUserDetailsService(UserRepository repository) {
-    this.repository = repository;
+  public UserDetailsServiceImpl(UserRepository repository) {
+      this.repository = repository;
   }
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     User user = this.repository.findByEmail(username)
         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-    return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
-        new ArrayList<>());
+    return new UserDetailsImpl(user);
   }
 }

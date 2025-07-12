@@ -1,40 +1,40 @@
-package com.unifucamp.gamearena.controller.dto;
+package com.unifucamp.gamearena.entity;
 
-import jakarta.validation.constraints.*;
-import org.springframework.format.annotation.DateTimeFormat;
-
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class InscricaoDTO {
+@Entity
+@Table(name = "inscricoes")
+public class InscricaoEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank(message = "O nome completo é obrigatório")
+    @Column(name = "nome_completo")
     private String nomeCompleto;
 
-    @NotBlank(message = "O nickname é obrigatório")
     private String nickname;
 
-    @Email(message = "O e-mail informado não é válido")
-    @NotBlank(message = "O e-mail é obrigatório")
+    @Column(name = "email", length = 150)
     private String email;
 
-    @NotNull(message = "A data de nascimento é obrigatória")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
 
-    @NotBlank(message = "O comprovante de pagamento é obrigatório")
+    @Column(name = "comprovante_pagamento", columnDefinition = "TEXT")
     private String comprovantePagamento;
 
-    @NotNull(message = "Aceitar os termos é obrigatório")
-    private Boolean aceitouTermos;
+    @Column(name = "aceitou_termos")
+    private boolean aceitouTermos;
 
+    @Column(name = "data_inscricao")
     private LocalDateTime dataInscricao;
 
-    private Boolean ativo;
+    private boolean ativo = false;
 
-    private Boolean pagamento;
+    private boolean pagamento = false;
 
     public Integer getId() {
         return id;
@@ -84,11 +84,11 @@ public class InscricaoDTO {
         this.comprovantePagamento = comprovantePagamento;
     }
 
-    public Boolean getAceitouTermos() {
+    public boolean isAceitouTermos() {
         return aceitouTermos;
     }
 
-    public void setAceitouTermos(Boolean aceitouTermos) {
+    public void setAceitouTermos(boolean aceitouTermos) {
         this.aceitouTermos = aceitouTermos;
     }
 
@@ -100,19 +100,19 @@ public class InscricaoDTO {
         this.dataInscricao = dataInscricao;
     }
 
-    public Boolean getAtivo() {
+    public boolean isAtivo() {
         return ativo;
     }
 
-    public void setAtivo(Boolean ativo) {
+    public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
 
-    public Boolean getPagamento() {
+    public boolean isPagamento() {
         return pagamento;
     }
 
-    public void setPagamento(Boolean pagamento) {
+    public void setPagamento(boolean pagamento) {
         this.pagamento = pagamento;
     }
 }
