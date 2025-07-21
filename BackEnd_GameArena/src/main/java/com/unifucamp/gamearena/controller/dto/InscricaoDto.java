@@ -1,19 +1,22 @@
-package com.unifucamp.gamearena.dto;
+package com.unifucamp.gamearena.controller.dto;
 
 import jakarta.validation.constraints.*;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class InscricaoDTO {
+public class InscricaoDto {
 
     private Integer id;
 
     @NotBlank(message = "O nome completo é obrigatório")
+    @Length(min = 5, max = 40)
     private String nomeCompleto;
 
     @NotBlank(message = "O nickname é obrigatório")
+    @Length(max = 40)
     private String nickname;
 
     @Email(message = "O e-mail informado não é válido")

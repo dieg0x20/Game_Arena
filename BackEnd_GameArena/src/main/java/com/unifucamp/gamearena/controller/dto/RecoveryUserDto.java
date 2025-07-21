@@ -1,4 +1,4 @@
-package com.unifucamp.gamearena.dto;
+package com.unifucamp.gamearena.controller.dto;
 
 import com.unifucamp.gamearena.entity.Role;
 

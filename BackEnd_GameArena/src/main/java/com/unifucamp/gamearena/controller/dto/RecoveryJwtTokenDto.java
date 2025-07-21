@@ -1,4 +1,4 @@
-package com.unifucamp.gamearena.dto;
+package com.unifucamp.gamearena.controller.dto;
 
 public record RecoveryJwtTokenDto(
         String token
