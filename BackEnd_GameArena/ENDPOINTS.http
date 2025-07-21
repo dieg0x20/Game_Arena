@@ -3,8 +3,8 @@ POST http://localhost:8080/users/login
 Content-Type: application/json
 
 {
-  "email": "",
-  "password": ""
+  "email": "admin@admin.com",
+  "password": "admin123"
 }
 
 ### Criar um novo usuario
