@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.logging.Logger;
 
 
 @Service
@@ -24,17 +25,20 @@ public class JwtTokenService {
     @Value("${jwt.expiration.hours}")
     private Integer EXPIRATION_HOURS;
 
+    private static final Logger log = Logger.getLogger(JwtTokenService.class.getName());
+
     public String generateToken(UserDetailsImpl  user) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
             return JWT.create()
-              .withIssuer(ISSUER)
-              .withIssuedAt(creationDate())
-              .withExpiresAt(expirationDate())
-              .withSubject(user.getUsername())
-              .sign(algorithm);
+                    .withIssuer(ISSUER)
+                    .withIssuedAt(creationDate())
+                    .withExpiresAt(expirationDate())
+                    .withSubject(user.getUsername())
+                    .sign(algorithm);
 
         } catch (JWTCreationException exception) {
+
             throw new RuntimeException("Erro ao gerar token.", exception);
         }
     }
