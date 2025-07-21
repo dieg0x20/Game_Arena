@@ -1,6 +1,6 @@
 package com.unifucamp.gamearena.controller;
 
-import com.unifucamp.gamearena.dto.InscricaoDTO;
+import com.unifucamp.gamearena.controller.dto.InscricaoDto;
 import com.unifucamp.gamearena.domain.Inscricao;
 import com.unifucamp.gamearena.mapper.InscricaoMapper;
 import com.unifucamp.gamearena.service.InscricaoService;
@@ -25,41 +25,41 @@ public class InscricaoController {
     }
 
     @PostMapping("/registrar")
-    public ResponseEntity<InscricaoDTO> criarInscricao(@RequestBody @Valid InscricaoDTO inscricaoDTO) {
+    public ResponseEntity<InscricaoDto> criarInscricao(@RequestBody @Valid InscricaoDto inscricaoDTO) {
         Inscricao inscricaoSalva = inscricaoService.salvar(InscricaoMapper.dtoToDomain(inscricaoDTO));
         return ResponseEntity.ok(InscricaoMapper.domainToDTO(inscricaoSalva));
     }
 
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     @PutMapping("/{id}")
-    public ResponseEntity<InscricaoDTO> atualizarInscricao(@PathVariable Integer id, @RequestBody InscricaoDTO inscricaoDTO) {
+    public ResponseEntity<InscricaoDto> atualizarInscricao(@PathVariable Integer id, @RequestBody InscricaoDto inscricaoDTO) {
         return inscricaoService.atualizar(id, InscricaoMapper.dtoToDomain(inscricaoDTO))
                 .map(inscricao -> ResponseEntity.ok(InscricaoMapper.domainToDTO(inscricao)))
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/{id}")
-    public ResponseEntity<InscricaoDTO> buscarPorId(@PathVariable Integer id) {
+    public ResponseEntity<InscricaoDto> buscarPorId(@PathVariable Integer id) {
         return inscricaoService.buscarPorId(id)
                 .map(inscricao -> ResponseEntity.ok(InscricaoMapper.domainToDTO(inscricao)))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping
-    public ResponseEntity<List<InscricaoDTO>> listarTodas(
+    public ResponseEntity<List<InscricaoDto>> listarTodas(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
         List<Inscricao> inscricoes = inscricaoService.listarTodas(pageable);
 
-        List<InscricaoDTO> inscricoesDTO = inscricoes.stream()
+        List<InscricaoDto> inscricoesDTO = inscricoes.stream()
                 .map(InscricaoMapper::domainToDTO)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(inscricoesDTO);
     }
 
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> desativarInscricao(@PathVariable Integer id) {
         boolean desativado = inscricaoService.desativar(id);
