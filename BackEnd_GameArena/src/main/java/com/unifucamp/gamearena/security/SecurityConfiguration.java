@@ -30,6 +30,7 @@ public class SecurityConfiguration {
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED = {
             "/api/users/login",
             "/inscricoes/registrar",
+            "/api/files/**"
     };
 
 
