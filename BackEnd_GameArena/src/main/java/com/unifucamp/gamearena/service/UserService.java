@@ -86,7 +86,7 @@ public class UserService {
         Optional<User> user = userRepository.findById(id);
 
         if (user.isEmpty()){
-            throw new UserNotExistsException();
+            throw new UserNotExistsException("Usuário não encontrado");
         }
 
         if (user.get().getEmail().equals(adminEmail)){

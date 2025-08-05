@@ -7,7 +7,7 @@ public class UserNotExistsException extends GameArenaException {
 
     private String detailMessage;
 
-    public UserNotExistsException() {
+    public UserNotExistsException(String detailMessage) {
         this.detailMessage = detailMessage;
     }
 
