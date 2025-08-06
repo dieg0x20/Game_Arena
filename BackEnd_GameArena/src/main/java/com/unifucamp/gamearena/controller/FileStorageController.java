@@ -2,6 +2,8 @@ package com.unifucamp.gamearena.controller;
 
 import com.unifucamp.gamearena.service.FileStorageService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -23,8 +25,12 @@ public class FileStorageController {
         this.fileStorageService = fileStorageService;
     }
 
+    private static final Logger log = LoggerFactory.getLogger(FileStorageController.class);
+
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+
+        log.info("Nova requisição de upload de arquivo.");
         String storedFileName = fileStorageService.storeFile(file);
 
         String downloadUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -39,6 +45,8 @@ public class FileStorageController {
     @GetMapping("/download/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName,
                                                  HttpServletRequest request) throws IOException {
+
+        log.info("Nova requisição de download de arquivo.");
         Resource resource = fileStorageService.loadFileAsResource(fileName);
 
         String contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());

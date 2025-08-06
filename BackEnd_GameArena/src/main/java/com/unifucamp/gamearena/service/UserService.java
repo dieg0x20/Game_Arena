@@ -55,10 +55,13 @@ public class UserService {
 
     public void createUser(CreateUserDto createUserDto) {
 
+        log.info("Nova tentativa de criação de usuários. {}", createUserDto.email());
+
         Optional<User> user = userRepository.findByEmail(createUserDto.email());
 
         if (user.isPresent()){
-            throw new UserDataAlreadyExistsException("Esse email já está cadastrado");
+            log.warn("Este e-mail já está em uso.");
+            throw new UserDataAlreadyExistsException("Este e-mail já está em uso.");
         }
 
         String password = securityConfiguration.passwordEncoder().encode(createUserDto.password());
@@ -73,7 +76,7 @@ public class UserService {
 
         userRepository.save(newUser);
 
-        log.info("Novo usuario cadastrado com sucesso");
+        log.info("Novo usuario {} cadastrado com sucesso", createUserDto.email());
     }
 
     public List<User> listUsers() {
@@ -83,13 +86,17 @@ public class UserService {
 
     public void deleteUser(String id) {
 
+        log.info("Tentativa de eliminar o usuario: {}", id);
+
         Optional<User> user = userRepository.findById(id);
 
         if (user.isEmpty()){
-            throw new UserNotExistsException("Usuário não encontrado");
+            log.info("Usuário não encontrado na base de dados.");
+            throw new UserNotExistsException("Usuário não encontrado na base de dados.");
         }
 
         if (user.get().getEmail().equals(adminEmail)){
+            log.warn("Tentativa de deletar o administrador padrão.");
             throw new GameArenaException();
         }
 

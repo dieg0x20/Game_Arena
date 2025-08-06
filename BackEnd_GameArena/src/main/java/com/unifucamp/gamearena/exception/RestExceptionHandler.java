@@ -32,7 +32,7 @@ public class RestExceptionHandler {
     }
 
     private record FieldError(
-            String name,
-            String reason
+            String campo,
+            String motivo
     ){}
 }

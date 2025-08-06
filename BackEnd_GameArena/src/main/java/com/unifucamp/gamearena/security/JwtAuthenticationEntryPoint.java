@@ -17,13 +17,12 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
             HttpServletResponse response,
             AuthenticationException authException) throws IOException {
 
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401 Unauthorized
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType("application/json;charset=UTF-8");
 
-        // Você pode personalizar a mensagem aqui, por exemplo, usando JSON
         String json = """
             {
-                "message": "%s"
+                "message": "Você não está autorizado a fazer essa ação."
             }
             """.formatted(authException.getMessage());
 
