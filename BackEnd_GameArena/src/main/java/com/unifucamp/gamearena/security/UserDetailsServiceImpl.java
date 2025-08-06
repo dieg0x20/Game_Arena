@@ -1,12 +1,11 @@
 package com.unifucamp.gamearena.security;
 
+import com.unifucamp.gamearena.entity.User;
+import com.unifucamp.gamearena.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-
-import com.unifucamp.gamearena.entity.User;
-import com.unifucamp.gamearena.repository.UserRepository;
 
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {

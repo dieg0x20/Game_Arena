@@ -1,9 +1,9 @@
 package com.unifucamp.gamearena.service;
 
 import com.unifucamp.gamearena.domain.Inscricao;
+import com.unifucamp.gamearena.entity.InscricaoEntity;
 import com.unifucamp.gamearena.mapper.InscricaoMapper;
 import com.unifucamp.gamearena.repository.InscricaoRepository;
-import com.unifucamp.gamearena.entity.InscricaoEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;

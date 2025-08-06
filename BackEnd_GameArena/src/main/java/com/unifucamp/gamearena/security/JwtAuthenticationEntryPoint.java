@@ -7,7 +7,6 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.nio.file.AccessDeniedException;
 
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
