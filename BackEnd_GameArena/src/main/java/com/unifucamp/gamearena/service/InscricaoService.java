@@ -13,6 +13,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+//TODO Resolver bug onde o usuario na criação pode modificar os atributos { ativo, pagamento, data de criação}
+//TODO Criar exceção de formato de data invalída
+
 @Service
 public class InscricaoService {
 

@@ -8,7 +8,7 @@ public class GameArenaException extends RuntimeException {
     public ProblemDetail toProblemDetail(){
 
         var pb = ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-        pb.setTitle("Game Arena internal server error");
+        pb.setTitle("Ocorreu um erro desconhecido.");
 
         return pb;
     }

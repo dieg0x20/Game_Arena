@@ -1,7 +1,7 @@
 package com.unifucamp.gamearena.service;
 
 import com.unifucamp.gamearena.entity.Role;
-import com.unifucamp.gamearena.enums.RoleName;
+import com.unifucamp.gamearena.enums.Roles;
 import com.unifucamp.gamearena.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,16 +17,17 @@ public class RoleService {
         this.roleRepository = roleRepository;
     }
 
-    public Role buscarRole(RoleName roleName) {
+    public Role findRole(Roles roleName) {
         return roleRepository.findByName(roleName)
-                .orElseGet(() -> roleRepository.save(
-                        Role.builder().name(roleName).build()
-                ));
-    }
+                .orElseGet(() -> {
+                    Role role = new Role();
+                    role.setName(roleName);
+                    return roleRepository.save(role);
+                });    }
 
-    public List<Role> buscarRoles(RoleName... roleNames) {
+    public List<Role> findRoles(Roles... roleNames) {
         return Arrays.stream(roleNames)
-                .map(this::buscarRole)
+                .map(this::findRole)
                 .toList();
     }
 }

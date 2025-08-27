@@ -1,7 +1,6 @@
 package com.unifucamp.gamearena.enums;
 
-public enum RoleName {
-
+public enum Roles {
     ROLE_USER,
     ROLE_ADMIN
 }

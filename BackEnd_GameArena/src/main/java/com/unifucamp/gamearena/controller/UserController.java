@@ -1,9 +1,7 @@
 package com.unifucamp.gamearena.controller;
 
-import com.unifucamp.gamearena.controller.dto.CreateUserDto;
-import com.unifucamp.gamearena.controller.dto.LoginUserDto;
-import com.unifucamp.gamearena.controller.dto.RecoveryJwtTokenDto;
-import com.unifucamp.gamearena.entity.User;
+import com.unifucamp.gamearena.controller.dto.CreateUserDTO;
+import com.unifucamp.gamearena.controller.dto.ResponseUserDTO;
 import com.unifucamp.gamearena.service.UserService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -15,12 +13,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
-    private final UserService  userService;
+    private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -28,19 +25,9 @@ public class UserController {
 
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
-    @PostMapping("/login")
-    public ResponseEntity<RecoveryJwtTokenDto> authenticateUser(@RequestBody @Valid LoginUserDto loginUserDto) {
-
-        log.info("Nova requisição de login.");
-        RecoveryJwtTokenDto token = userService.authenticateUser(loginUserDto);
-
-        log.info("Novo login efetuado com sucesso.");
-        return new ResponseEntity<>(token, HttpStatus.OK);
-    }
-
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/register")
-    public ResponseEntity<Void> createUser(@RequestBody @Valid CreateUserDto createUserDto) {
+    @PostMapping
+    public ResponseEntity<Void> createUser(@RequestBody @Valid CreateUserDTO createUserDto) {
 
         log.info("Nova requisição de registro de usuário.");
         userService.createUser(createUserDto);
@@ -49,9 +36,10 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
-    public ResponseEntity<List<User>>  getAllUsers() {
+    public ResponseEntity<List<ResponseUserDTO>> getAllUsers() {
         log.info("Nova requisição para listar usuários.");
         return ResponseEntity.ok(userService.listUsers());
     }
@@ -65,6 +53,6 @@ public class UserController {
         log.info("Usuário deletado com sucesso.");
         return ResponseEntity.ok().build();
     }
-
 }
+
 

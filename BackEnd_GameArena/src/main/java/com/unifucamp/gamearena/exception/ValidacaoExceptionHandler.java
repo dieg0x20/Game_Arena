@@ -20,8 +20,8 @@ public class ValidacaoExceptionHandler {
 
         ex.getBindingResult().getFieldErrors().forEach(erro -> {
             String campo = erro.getField();
-            String menssagem = erro.getDefaultMessage();
-            erros.put(campo, menssagem);
+            String mensagem = erro.getDefaultMessage();
+            erros.put(campo, mensagem);
         });
 
         return ResponseEntity.badRequest().body(erros);

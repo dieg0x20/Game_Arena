@@ -2,9 +2,8 @@ package com.unifucamp.gamearena.config;
 
 import com.unifucamp.gamearena.entity.Role;
 import com.unifucamp.gamearena.entity.User;
-import com.unifucamp.gamearena.enums.RoleName;
+import com.unifucamp.gamearena.enums.Roles;
 import com.unifucamp.gamearena.repository.UserRepository;
-import com.unifucamp.gamearena.security.SecurityConfiguration;
 import com.unifucamp.gamearena.service.RoleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,8 +19,8 @@ import java.util.Optional;
 public class AdminInitializerConfig implements ApplicationRunner {
 
     private final UserRepository userRepository;
-    private final SecurityConfiguration securityConfiguration;
     private final RoleService roleService;
+    private final BCryptEncoder bCryptEncoder;
     private static final Logger logger = LoggerFactory.getLogger(AdminInitializerConfig.class);
 
     @Value("${admin.email}")
@@ -29,12 +28,11 @@ public class AdminInitializerConfig implements ApplicationRunner {
     @Value("${admin.password}")
     private String adminPassword;
 
-    public AdminInitializerConfig(UserRepository userRepository, SecurityConfiguration securityConfiguration, RoleService roleService) {
+    public AdminInitializerConfig(UserRepository userRepository, RoleService roleService,  BCryptEncoder bCryptEncoder) {
         this.userRepository = userRepository;
-        this.securityConfiguration = securityConfiguration;
         this.roleService = roleService;
+        this.bCryptEncoder = bCryptEncoder;
     }
-
 
     @Override
     public void run(ApplicationArguments args) {
@@ -47,8 +45,8 @@ public class AdminInitializerConfig implements ApplicationRunner {
 
         if (optionalUser.isEmpty()) {
 
-            String password = securityConfiguration.passwordEncoder().encode(adminPassword);
-            List<Role> roles = roleService.buscarRoles(RoleName.ROLE_ADMIN, RoleName.ROLE_USER);
+            String password = bCryptEncoder.passwordEncoder().encode(adminPassword);
+            List<Role> roles = roleService.findRoles(Roles.ROLE_ADMIN, Roles.ROLE_USER);
 
             User user = new User(
                     adminEmail,

@@ -1,6 +1,6 @@
 package com.unifucamp.gamearena.controller;
 
-import com.unifucamp.gamearena.service.FileStorageService;
+import com.unifucamp.gamearena.service.ArmazenamentoService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +8,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -17,15 +16,15 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/files")
-public class FileStorageController {
+public class ArmazenamentoController {
 
-    private final FileStorageService fileStorageService;
+    private final ArmazenamentoService fileStorageService;
 
-    public FileStorageController(FileStorageService fileStorageService) {
+    public ArmazenamentoController(ArmazenamentoService fileStorageService) {
         this.fileStorageService = fileStorageService;
     }
 
-    private static final Logger log = LoggerFactory.getLogger(FileStorageController.class);
+    private static final Logger log = LoggerFactory.getLogger(ArmazenamentoController.class);
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
@@ -41,7 +40,6 @@ public class FileStorageController {
         return ResponseEntity.ok(downloadUrl);
     }
 
-    @PreAuthorize("hasRole('USER')")
     @GetMapping("/download/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName,
                                                  HttpServletRequest request) throws IOException {

@@ -1,15 +1,10 @@
 package com.unifucamp.gamearena.entity;
 
-import com.unifucamp.gamearena.enums.RoleName;
+import com.unifucamp.gamearena.enums.Roles;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name= "roles")
-@Builder
 public class Role {
 
     @Id
@@ -17,12 +12,12 @@ public class Role {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private RoleName name;
+    private Roles name;
 
     public Role() {
     }
 
-    public Role(Long id, RoleName name) {
+    public Role(Long id, Roles name) {
         this.id = id;
         this.name = name;
     }
@@ -35,11 +30,12 @@ public class Role {
         this.id = id;
     }
 
-    public RoleName getName() {
+    public Roles getName() {
         return name;
     }
 
-    public void setName(RoleName name) {
+    public void setName(Roles name) {
         this.name = name;
     }
 }
+

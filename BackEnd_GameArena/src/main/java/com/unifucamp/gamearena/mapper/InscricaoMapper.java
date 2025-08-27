@@ -1,13 +1,13 @@
 package com.unifucamp.gamearena.mapper;
 
-import com.unifucamp.gamearena.controller.dto.InscricaoDto;
+import com.unifucamp.gamearena.controller.dto.InscricaoDTO;
 import com.unifucamp.gamearena.domain.Inscricao;
 import com.unifucamp.gamearena.entity.InscricaoEntity;
 
 public class InscricaoMapper {
 
-    public static InscricaoDto domainToDTO(Inscricao domain) {
-        InscricaoDto dto = new InscricaoDto();
+    public static InscricaoDTO domainToDTO(Inscricao domain) {
+        com.unifucamp.gamearena.controller.dto.InscricaoDTO dto = new com.unifucamp.gamearena.controller.dto.InscricaoDTO();
         dto.setId(domain.getId());
         dto.setNomeCompleto(domain.getNomeCompleto());
         dto.setNickname(domain.getNickname());
@@ -51,7 +51,7 @@ public class InscricaoMapper {
         return domain;
     }
 
-    public static Inscricao dtoToDomain(InscricaoDto incricaoDto) {
+    public static Inscricao dtoToDomain(InscricaoDTO incricaoDto) {
         Inscricao domain = new Inscricao();
         domain.setId(incricaoDto.getId());
         domain.setNomeCompleto(incricaoDto.getNomeCompleto());

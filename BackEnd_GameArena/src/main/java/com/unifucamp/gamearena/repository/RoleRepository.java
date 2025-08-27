@@ -1,13 +1,11 @@
 package com.unifucamp.gamearena.repository;
 
 import com.unifucamp.gamearena.entity.Role;
-import com.unifucamp.gamearena.enums.RoleName;
+import com.unifucamp.gamearena.enums.Roles;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
-public interface RoleRepository extends JpaRepository<Role, Integer> {
-    Optional<Role> findByName(RoleName name);
+public interface RoleRepository extends JpaRepository<Role, String> {
+    Optional<Role> findByName(Roles name);
 }
