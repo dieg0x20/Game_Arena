@@ -1,16 +1,5 @@
 package com.unifucamp.gamearena.service;
 
-import com.unifucamp.gamearena.config.ArmazenamentoProps;
-import com.unifucamp.gamearena.exception.ArmazenamentoException;
-import jakarta.annotation.PostConstruct;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -19,6 +8,19 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.UUID;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.unifucamp.gamearena.config.ArmazenamentoProps;
+import com.unifucamp.gamearena.exception.ArmazenamentoException;
+
+import jakarta.annotation.PostConstruct;
 
 @Service
 public class ArmazenamentoService {
@@ -65,7 +67,8 @@ public class ArmazenamentoService {
 
             if (mimeType == null || (!mimeType.startsWith("image/") && !mimeType.equals("application/pdf"))) {
                 Files.delete(tempFile);
-                log.warn("Tentativa de salvar um arquivo com conteúdo inválido ou potencialmente perigoso. {}", mimeType);
+                log.warn("Tentativa de salvar um arquivo com conteúdo inválido ou potencialmente perigoso. {}",
+                        mimeType);
                 throw new ArmazenamentoException("Tipo de conteúdo inválido ou potencialmente perigoso.");
             }
 
